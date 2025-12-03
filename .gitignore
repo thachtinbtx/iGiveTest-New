@@ -1,0 +1,30 @@
+# Composer dependencies
+/vendor/
+
+# Local configuration
+# If you have a local config file, add it here
+# For example:
+# config.local.php
+inc/config.local.php
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node dependencies
+/node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE helper files
+.idea/
+.vscode/
+
+# Temporary files
+/files/
+!/files/.gitkeep

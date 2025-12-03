@@ -1,0 +1,238 @@
+<?php /* Smarty version 2.6.18, created on 2025-12-02 15:22:42
+         compiled from _header.tpl.html */ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="<?php echo $this->_tpl_vars['lngstr']['text_direction']; ?>
+">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="inc/css/neumorphic.css">
+<link rel="stylesheet" href="inc/css/new_design.css">
+<style>
+  /* Hide default table borders from legacy css if they interfere */
+  table.rowtable2, table.rowtable2 td { border: none !important; }
+  
+  /* Modernize legacy table rows */
+  .rowone td, .rowtwo td {
+      padding: 12px 16px !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      color: #334155 !important;
+  }
+  
+  /* Style inputs inside legacy tables */
+  .rowone input[type="text"], .rowtwo input[type="text"],
+  .rowone input[type="password"], .rowtwo input[type="password"],
+  .rowone select, .rowtwo select,
+  .rowone textarea, .rowtwo textarea {
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.5rem;
+      outline: none;
+      transition: all 0.2s;
+      width: 100%;
+      max-width: 400px;
+  }
+  
+  .rowone input:focus, .rowtwo input:focus,
+  .rowone select:focus, .rowtwo select:focus,
+  .rowone textarea:focus, .rowtwo textarea:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  }
+  
+  /* Style labels/headers in the first column */
+  .rowone td:first-child, .rowtwo td:first-child {
+      font-weight: 600;
+      color: #475569;
+      width: 30%;
+      vertical-align: middle;
+  }
+</style>
+<script language="javascript" src="shared/shared.js" type="text/javascript"></script>
+<?php echo $this->_tpl_vars['g_vars']['page']['meta']; ?>
+
+</head>
+<body <?php echo $this->_tpl_vars['g_vars']['page']['body_tag']; ?>
+<?php if ($this->_tpl_vars['g_vars']['page']['content_protection']): ?>oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;"<?php endif; ?>>
+<?php if ($this->_tpl_vars['g_vars']['page']['content_protection']): ?><script language="JavaScript1.1">
+// <!--
+var debug = true;
+function right(e) {
+if (navigator.appName == 'Netscape' && (e.which == 3 || e.which == 2))
+return false;
+else if (navigator.appName == 'Microsoft Internet Explorer' && (event.button == 2 || event.button == 3)) {
+alert('Please do not copy this page content');
+return false;
+}
+return true;
+}
+document.onmousedown=right;
+if (document.layers) window.captureEvents(Event.MOUSEDOWN);
+window.onmousedown=right;
+//-->
+</script><?php endif; ?>
+
+<div class="container mx-auto px-4 py-4 neumorphic-light" style="max-width: 96vw;">
+    <!-- Top Header / Logo Area -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+        <div class="logo-area">
+            <?php echo $this->_tpl_vars['lngstr']['branding']['top_logo']; ?>
+
+        </div>
+        <div class="text-2xl font-bold text-pastel-sky tracking-tight opacity-90">
+            <?php echo $this->_tpl_vars['g_vars']['page']['title']; ?>
+
+        </div>
+    </div>
+
+<?php if (! $this->_tpl_vars['g_vars']['page']['hide_cpanel']): ?>
+    <!-- Desktop Navigation Bar (unchanged) -->
+    <nav class="hidden md:flex glassmorphic-light rounded-2xl mb-8 px-4 py-3 shadow-neumorphic-sm relative z-40 flex-col md:flex-row md:justify-between md:items-center gap-4">
+        <div class="flex flex-col md:flex-row flex-wrap justify-center gap-2">
+            <a href="index.php" class="neumorphic-light px-4 py-2 rounded-xl text-slate-700 font-semibold hover:bg-white/50 hover:text-pastel-sky transition-all duration-200 items-center gap-2 flex">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <?php echo $this->_tpl_vars['lngstr']['panel_home']; ?>
+
+            </a>
+            
+            <?php if ($_SESSION['MAIN']['access_questionbank'] > 0): ?>
+                <a href="question-bank.php" class="neumorphic-light px-4 py-2 rounded-xl text-slate-700 font-semibold hover:bg-white/50 hover:text-pastel-sky transition-all duration-200 block text-center md:text-left"><?php echo $this->_tpl_vars['lngstr']['panel_questionbank']; ?>
+</a>
+            <?php elseif ($_SESSION['MAIN']['access_subjects'] > 0): ?>
+                <a href="subjects.php" class="neumorphic-light px-4 py-2 rounded-xl text-slate-700 font-semibold hover:bg-white/50 hover:text-pastel-sky transition-all duration-200 block text-center md:text-left"><?php echo $this->_tpl_vars['lngstr']['panel_questionbank']; ?>
+</a>
+            <?php endif; ?>
+            
+            <?php if ($_SESSION['MAIN']['access_testmanager'] > 0): ?>
+                <a href="test-manager.php" class="neumorphic-light px-4 py-2 rounded-xl text-slate-700 font-semibold hover:bg-white/50 hover:text-pastel-sky transition-all duration-200 block text-center md:text-left"><?php echo $this->_tpl_vars['lngstr']['panel_edittests']; ?>
+</a>
+            <?php elseif ($_SESSION['MAIN']['access_gradingsystems'] > 0): ?>
+                <a href="grades.php" class="neumorphic-light px-4 py-2 rounded-xl text-slate-700 font-semibold hover:bg-white/50 hover:text-pastel-sky transition-all duration-200 block text-center md:text-left"><?php echo $this->_tpl_vars['lngstr']['panel_edittests']; ?>
+</a>
+            <?php endif; ?>
+             
+            <?php if ($_SESSION['MAIN']['access_reportsmanager'] > 0): ?>
+                <a href="reports-manager.php" class="neumorphic-light px-4 py-2 rounded-xl text-slate-700 font-semibold hover:bg-white/50 hover:text-pastel-sky transition-all duration-200 block text-center md:text-left"><?php echo $this->_tpl_vars['lngstr']['panel_results']; ?>
+</a>
+            <?php endif; ?>
+        </div>
+        
+        <div class="border-t md:border-t-0 md:border-l border-white/20 pt-4 md:pt-0 md:pl-2 w-full md:w-auto flex flex-col md:flex-row justify-center gap-2">
+            <a href="users.php?action=edit&userid=<?php echo $_SESSION['MAIN']['userid']; ?>
+" class="neumorphic-light px-4 py-2 rounded-xl font-semibold hover:bg-white/50 transition-all duration-200 flex items-center justify-center gap-2 text-slate-700 hover:text-indigo-500">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                <?php echo $this->_tpl_vars['lngstr']['panel_myprofile']; ?>
+
+            </a>
+            <a href="signout.php" class="neumorphic-light px-4 py-2 rounded-xl font-bold hover:bg-white/50 transition-all duration-200 flex items-center justify-center gap-2 text-red-500 hover:text-red-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                <?php echo $this->_tpl_vars['lngstr']['panel_signout']; ?>
+
+            </a>
+        </div>
+    </nav>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <div id="mobile-bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 h-20 bg-white/70 backdrop-blur-xl border-t border-white/50 shadow-t-lg z-50">
+        <nav class="w-full h-full">
+            <ul class="flex justify-around items-center h-full px-2">
+                <li>
+                    <a href="index.php" class="flex flex-col items-center justify-center gap-1 text-slate-600 hover:text-indigo-600">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        <span class="text-xs font-medium"><?php echo $this->_tpl_vars['lngstr']['panel_home']; ?>
+</span>
+                    </a>
+                </li>
+                <?php if ($_SESSION['MAIN']['access_testmanager'] > 0 || $_SESSION['MAIN']['access_gradingsystems'] > 0): ?>
+                <li>
+                    <a href="test-manager.php" class="flex flex-col items-center justify-center gap-1 text-slate-600 hover:text-indigo-600">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <span class="text-xs font-medium"><?php echo $this->_tpl_vars['lngstr']['panel_edittests']; ?>
+</span>
+                    </a>
+                </li>
+                <?php endif; ?>
+                <li>
+                    <a href="users.php?action=edit&userid=<?php echo $_SESSION['MAIN']['userid']; ?>
+" class="flex flex-col items-center justify-center gap-1 text-slate-600 hover:text-indigo-600">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        <span class="text-xs font-medium"><?php echo $this->_tpl_vars['lngstr']['panel_myprofile']; ?>
+</span>
+                    </a>
+                </li>
+                <li>
+                    <button id="mobile-menu-more" class="flex flex-col items-center justify-center gap-1 text-slate-600 hover:text-indigo-600">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <span class="text-xs font-medium">More</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- "More" Drawer for Mobile -->
+    <div id="mobile-more-drawer" class="fixed bottom-0 left-0 right-0 z-40 bg-white/70 backdrop-blur-xl rounded-t-3xl p-4 transform translate-y-full transition-transform duration-300 ease-in-out md:hidden">
+        <div class="flex justify-end mb-2">
+            <button id="mobile-drawer-close" class="p-2 text-slate-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <nav class="flex flex-col gap-2">
+            <?php if ($_SESSION['MAIN']['access_questionbank'] > 0): ?>
+                <a href="question-bank.php" class="font-semibold text-slate-700 p-3 rounded-lg hover:bg-white/50"><?php echo $this->_tpl_vars['lngstr']['panel_questionbank']; ?>
+</a>
+            <?php elseif ($_SESSION['MAIN']['access_subjects'] > 0): ?>
+                <a href="subjects.php" class="font-semibold text-slate-700 p-3 rounded-lg hover:bg-white/50"><?php echo $this->_tpl_vars['lngstr']['panel_questionbank']; ?>
+</a>
+            <?php endif; ?>
+            
+            <?php if ($_SESSION['MAIN']['access_reportsmanager'] > 0): ?>
+                <a href="reports-manager.php" class="font-semibold text-slate-700 p-3 rounded-lg hover:bg-white/50"><?php echo $this->_tpl_vars['lngstr']['panel_results']; ?>
+</a>
+            <?php endif; ?>
+
+            <?php if ($_SESSION['MAIN']['access_users'] > 0): ?>
+                <a href="users.php" class="font-semibold text-slate-700 p-3 rounded-lg hover:bg-white/50"><?php echo $this->_tpl_vars['lngstr']['panel_usersandgroups']; ?>
+</a>
+            <?php elseif ($_SESSION['MAIN']['access_groups'] > 0): ?>
+                <a href="groups.php" class="font-semibold text-slate-700 p-3 rounded-lg hover:bg-white/50"><?php echo $this->_tpl_vars['lngstr']['panel_usersandgroups']; ?>
+</a>
+            <?php endif; ?>
+
+            <div class="border-t border-slate-200 mt-2 pt-2">
+                <a href="signout.php" class="font-bold text-red-500 p-3 rounded-lg hover:bg-red-50 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    <?php echo $this->_tpl_vars['lngstr']['panel_signout']; ?>
+
+                </a>
+            </div>
+        </nav>
+    </div>
+    <div id="mobile-drawer-overlay" class="fixed inset-0 bg-black/30 z-30 hidden md:hidden"></div>
+    
+    <script>
+        const moreButton = document.getElementById('mobile-menu-more');
+        const closeButton = document.getElementById('mobile-drawer-close');
+        const drawer = document.getElementById('mobile-more-drawer');
+        const overlay = document.getElementById('mobile-drawer-overlay');
+
+        moreButton.addEventListener('click', () => {
+            drawer.classList.remove('translate-y-full');
+            overlay.classList.remove('hidden');
+        });
+
+        const closeDrawer = () => {
+            drawer.classList.add('translate-y-full');
+            overlay.classList.add('hidden');
+        };
+
+        closeButton.addEventListener('click', closeDrawer);
+        overlay.addEventListener('click', closeDrawer);
+    </script>
+<?php endif; ?>
+
+<!-- Main Content Area -->
+<div class="main-content">

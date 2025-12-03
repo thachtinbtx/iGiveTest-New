@@ -1,0 +1,97 @@
+
+/* Neumorphic and Glassmorphic Design */
+
+body {
+    background-color: paleturquoise;
+    font-family: 'Nunito', sans-serif;
+}
+
+.container {
+    max-width: 96vw;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    color: #0f172a;
+}
+
+/* Typography for large screens */
+@media (min-width: 1024px) {
+    body {
+        font-size: 24px;
+    }
+    h1 {
+        font-size: 100px;
+    }
+    h2 {
+        font-size: 80px;
+    }
+    h3 {
+        font-size: 60px;
+    }
+    pre, code {
+        font-size: 24px;
+    }
+}
+
+/* Typography for smaller screens */
+@media (max-width: 1023px) {
+    body {
+        font-size: 14px;
+    }
+    h1 {
+        font-size: 48px;
+    }
+    h2 {
+        font-size: 36px;
+    }
+    h3 {
+        font-size: 24px;
+    }
+    pre, code {
+        font-size: 14px;
+    }
+}
+
+.neumorphic-light {
+    background: paleturquoise;
+    box-shadow: 10px 10px 20px rgba(163, 177, 198, 0.6), -10px -10px 20px rgba(255, 255, 255, 0.5);
+}
+
+.neumorphic-light-inset {
+    background: paleturquoise;
+    box-shadow: inset 10px 10px 20px rgba(163, 177, 198, 0.6), inset -10px -10px 20px rgba(255, 255, 255, 0.5);
+}
+
+.glassmorphic-light {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: dimgray;
+    color: white;
+}
+
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6 {
+    color: white;
+}
+
+.neumorphic-dark {
+    background: dimgray;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(128, 128, 128, 0.2);
+}
+
+.neumorphic-dark-inset {
+    background: dimgray;
+    box-shadow: inset 10px 10px 20px rgba(0, 0, 0, 0.2), inset -10px -10px 20px rgba(128, 128, 128, 0.2);
+}
+
+.glassmorphic-dark {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Cyan glow */
+}

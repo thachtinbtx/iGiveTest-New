@@ -1,0 +1,226 @@
+<{* Smarty *}>
+<{include file="_header.tpl.html"}>
+
+<div class="min-h-screen p-4 sm:p-8 flex items-center justify-center">
+  
+  <!-- Main Results Container -->
+  <div class="neu-card w-full max-w-4xl relative overflow-hidden">
+    
+    <!-- Decorative Top Border with Gradient -->
+    <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-sky-300 to-indigo-300"></div>
+    
+    <!-- Floating Background Orbs for Scientific Feel -->
+    <div class="absolute -top-32 -right-32 w-64 h-64 bg-gradient-radial from-white/30 to-transparent rounded-full blur-3xl animate-float pointer-events-none"></div>
+    <div class="absolute -bottom-32 -left-32 w-64 h-64 bg-gradient-radial from-white/30 to-transparent rounded-full blur-3xl animate-float pointer-events-none" style="animation-delay: 2s;"></div>
+    
+    <div class="relative p-5 sm:p-10">
+      
+      <{if $g_vars.page.custom_report}>
+        <div class="prose prose-slate max-w-none">
+          <{$g_vars.page.custom_report}>
+        </div>
+      <{else}>
+        
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-accent mb-2 tracking-tight drop-shadow-sm">
+            <{$g_vars.page.header}>
+          </h1>
+          <p class="text-muted text-base sm:text-lg font-medium">
+            <{$g_vars.page.test_name_label}>
+          </p>
+        </div>
+
+        <!-- Score Display with Neumorphic Circle -->
+        <div class="flex justify-center mb-10">
+          <div class="relative">
+            <!-- Neumorphic Circle Background -->
+            <div class="neu-card rounded-full w-48 h-48 sm:w-64 sm:h-64 flex flex-col items-center justify-center ring-4 ring-white/10">
+              <div class="text-muted text-xs sm:text-sm font-bold uppercase tracking-wider mb-1 sm:mb-2">Điểm số</div>
+              <div class="text-5xl sm:text-7xl font-black text-accent drop-shadow-md">
+                <{if $smarty.session.MAIN.yt_result_showpoints}>
+                  <{$g_vars.page.score}>%
+                <{else}>
+                  --
+                <{/if}>
+              </div>
+              <{if $smarty.session.MAIN.yt_result_showpoints}>
+                <div class="text-muted text-xs mt-2 font-medium px-4 text-center">
+                  <span class="block text-sm font-bold"><{$smarty.session.MAIN.yt_got_points}> / <{$smarty.session.MAIN.yt_pointsmax}></span>
+                  <{if $smarty.session.MAIN.yt_points_pending > 0}>
+                    <span class="block text-[10px] text-red-400 mt-1 font-bold">(Chưa tính điểm trả lời tự luận)</span>
+                  <{else}>
+                    <span class="text-[10px] uppercase tracking-wide">Điểm đạt được / Tổng điểm bài thi</span>
+                  <{/if}>
+                </div>
+              <{/if}>
+            </div>
+            
+            <!-- Floating Badge if Perfect Score -->
+            <{if $g_vars.page.score == 100}>
+              <div class="absolute -top-2 -right-2 sm:top-0 sm:right-0 neu-card rounded-full px-4 py-2 animate-bounce">
+                <span class="text-2xl sm:text-3xl">🎉</span>
+              </div>
+            <{/if}>
+          </div>
+        </div>
+
+        <!-- Stats Grid with Glassmorphic Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+          
+          <!-- Date Card -->
+          <div class="neu-card rounded-2xl p-4 sm:p-5 group">
+            <div class="flex items-center gap-3">
+              <div class="bg-white/20 rounded-xl p-3 transition-colors">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <div class="text-muted text-xs font-bold uppercase tracking-wide">Ngày thi</div>
+                <div class="text-main font-bold text-sm sm:text-base"><{$g_vars.page.test_date}></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time Spent Card -->
+          <div class="neu-card rounded-2xl p-4 sm:p-5 group">
+            <div class="flex items-center gap-3">
+              <div class="bg-white/20 rounded-xl p-3 transition-colors">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <div class="text-muted text-xs font-bold uppercase tracking-wide">Thời gian</div>
+                <div class="text-main font-bold text-sm sm:text-base"><{$g_vars.page.time_spent}></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time Away Card -->
+          <div class="neu-card rounded-2xl p-4 sm:p-5 group">
+            <div class="flex items-center gap-3">
+              <div class="bg-rose-100 rounded-xl p-3 transition-colors">
+                <svg class="w-6 h-6 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <div class="text-muted text-xs font-bold uppercase tracking-wide">Thời gian rời màn hình</div>
+                <div class="text-rose-600 font-bold text-sm sm:text-base"><{$g_vars.page.time_away}></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Correct Answers Card -->
+          <{if $smarty.session.MAIN.yt_result_showanswers}>
+          <div class="neu-card rounded-2xl p-4 sm:p-5 group">
+            <div class="flex items-center gap-3">
+              <div class="bg-white/20 rounded-xl p-3 transition-colors">
+                <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <div class="text-muted text-xs font-bold uppercase tracking-wide">Số câu đúng</div>
+                <div class="text-main font-bold text-sm sm:text-base">
+                  <{$smarty.session.MAIN.yt_got_answers}> / <{$smarty.session.MAIN.yt_questioncount}>
+                </div>
+              </div>
+            </div>
+          </div>
+          <{/if}>
+
+          <!-- Grade Card -->
+          <{if $smarty.session.MAIN.yt_result_showgrade}>
+          <div class="neu-card rounded-2xl p-4 sm:p-5 sm:col-span-2 lg:col-span-3 group">
+            <div class="flex items-center justify-center gap-4">
+              <div class="bg-white/20 rounded-xl p-3 transition-colors">
+                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                </svg>
+              </div>
+              <div class="text-center">
+                <div class="text-muted text-xs font-bold uppercase tracking-wide">Xếp loại</div>
+                <div class="text-accent font-black text-3xl sm:text-4xl drop-shadow-sm"><{$g_vars.page.grade.name}></div>
+              </div>
+            </div>
+          </div>
+          <{/if}>
+          
+        </div>
+
+        <!-- Grade Feedback -->
+        <{if $smarty.session.MAIN.yt_result_showgradefeedback}>
+          <div class="neu-card rounded-2xl p-5 sm:p-6 mb-8 border-l-4 border-accent">
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <div>
+                <h3 class="text-accent font-bold text-lg mb-1">Feedback</h3>
+                <p class="text-muted leading-relaxed"><{$g_vars.page.grade.feedback}></p>
+              </div>
+            </div>
+          </div>
+        <{/if}>
+
+        <!-- Download Options -->
+        <{if $g_vars.page.show_advancedreport_html or $g_vars.page.show_advancedreport_pdf}>
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <{if $g_vars.page.show_advancedreport_html}>
+            <a href="getfile.php?action=thtml&resultid=<{$smarty.session.MAIN.resultid}>" target="_blank" 
+               class="neu-card px-5 py-3 rounded-xl flex items-center gap-2 text-muted font-bold text-sm sm:text-base active:scale-95">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              <{$lngstr.page_test.result.showhtml}>
+            </a>
+          <{/if}>
+          <{if $g_vars.page.show_advancedreport_pdf}>
+            <a href="getfile.php?action=tpdf&resultid=<{$smarty.session.MAIN.resultid}>&file=test-results.pdf" target="_blank"
+               class="neu-card px-5 py-3 rounded-xl flex items-center gap-2 text-muted font-bold text-sm sm:text-base active:scale-95">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+              <{$lngstr.label_result_showpdf}>
+            </a>
+          <{/if}>
+        </div>
+        <{/if}>
+
+      <{/if}>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+        <{if $g_vars.page.show_reportsmanager}>
+          <a href="reports-manager.php?action=viewq&resultid=<{$smarty.session.MAIN.resultid}>" 
+             class="neu-btn w-full sm:w-auto px-8 py-3.5 text-base font-bold text-center rounded-xl hover:scale-105 transition-transform">
+            <{$lngstr.page_test_results_viewresults}>
+          </a>
+        <{/if}>
+
+        <{if $g_vars.page.show_nexttest}>
+          <a href="test.php?testid=<{$smarty.session.MAIN.yt_nexttestid}>" 
+             class="neu-btn w-full sm:w-auto px-8 py-3.5 text-base font-bold text-center rounded-xl hover:scale-105 transition-transform">
+            <{$lngstr.page_test.results_nexttest}>
+          </a>
+        <{else}>
+          <a href="index.php" 
+             class="neu-btn w-full sm:w-auto px-8 py-3.5 text-base font-bold text-center rounded-xl hover:scale-105 transition-transform text-slate-700">
+            <{$lngstr.page_test_results_homepage}>
+          </a>
+        <{/if}>
+      </div>
+      
+      <!-- Encouragement Message -->
+      <div class="text-center mt-10 text-muted text-sm font-medium italic opacity-80">
+        Chúc các em ngày càng học tốt hơn! 🎓
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<{include file="_footer.tpl.html"}>

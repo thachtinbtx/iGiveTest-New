@@ -1,0 +1,242 @@
+<?php /* Smarty version 2.6.18, created on 2025-12-01 05:37:34
+         compiled from test-questions.tpl.html */ ?>
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => "_header.tpl.html", 'smarty_include_vars' => array()));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+
+<style>
+/* Fix for radio button checkmark visibility */
+input[type="radio"]:checked + div .radio-dot {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+input[type="radio"]:checked + div {
+    background-color: #1e293b !important; /* slate-800 */
+    border-color: #4f46e5 !important; /* indigo-600 */
+}
+input[type="radio"]:checked + div .answer {
+    color: white !important;
+}
+input[type="radio"]:checked + div .right-checkmark {
+    opacity: 1 !important;
+}
+
+/* Fix for checkbox checkmark visibility */
+input[type="checkbox"]:checked + div .checkbox-icon {
+    opacity: 1 !important;
+}
+input[type="checkbox"]:checked + div {
+    background-color: #1e293b !important; /* slate-800 */
+    border-color: #4f46e5 !important; /* indigo-600 */
+}
+input[type="checkbox"]:checked + div .answer {
+    color: white !important;
+}
+input[type="checkbox"]:checked + div .right-checkmark {
+    opacity: 1 !important;
+}
+</style>
+
+<?php if ($this->_tpl_vars['g_vars']['page']['test_time']['use']): ?>
+<script language=JavaScript type="text/javascript"><!--
+var dStopTime = new Date();
+dStopTime.setHours(dStopTime.getHours()<?php if ($this->_tpl_vars['g_vars']['page']['test_time']['hours']): ?>+<?php echo $this->_tpl_vars['g_vars']['page']['test_time']['hours']; ?>
+<?php endif; ?>,dStopTime.getMinutes()<?php if ($this->_tpl_vars['g_vars']['page']['test_time']['minutes']): ?>+<?php echo $this->_tpl_vars['g_vars']['page']['test_time']['minutes']; ?>
+<?php endif; ?>,dStopTime.getSeconds()<?php if ($this->_tpl_vars['g_vars']['page']['test_time']['seconds']): ?>+<?php echo $this->_tpl_vars['g_vars']['page']['test_time']['seconds']; ?>
+<?php endif; ?>);
+var clockID = 0;
+function UpdateClock() {
+ if(clockID) {
+  clearTimeout(clockID);
+  clockID  = 0;
+ }
+ var dNow = new Date();
+ if(dNow<dStopTime) {
+  dNow.setHours(dStopTime.getHours()-dNow.getHours(),dStopTime.getMinutes()-dNow.getMinutes(),dStopTime.getSeconds()-dNow.getSeconds());
+  strContent = "&nbsp;<b>"+setLeadingZero(dNow.getHours())+":"+setLeadingZero(dNow.getMinutes())+":"+setLeadingZero(dNow.getSeconds())+"</b>&nbsp;";
+  if(dNow.getMinutes()<1) strContent="<font color=#ff0000>"+strContent+"</font>";
+  document.getElementById("vtimer").innerHTML=strContent;
+  clockID = setTimeout("UpdateClock()", 500);
+ } else {
+  clearTimeout(clockID);
+  clockID = 0;
+  document.getElementById("vtimer").innerHTML = "<b>00:00:00</b>";
+ }
+}
+function setLeadingZero(i) {
+ return (i<10) ? "0"+i : i;
+}
+clockID = setTimeout("UpdateClock()", 500);
+//--></script>
+<?php endif; ?>
+
+<script language=JavaScript type="text/javascript"><!--
+function checkAnswer(ctlToggleAllCB, nAnswersAllowedToSelect) {
+	var bAllowTheAnswerCheck = false;
+	var nAnswersSelected = 0;
+	var ctlForm = ctlToggleAllCB.form;
+	var ctlTR = null;
+	for (var i = 0; i < ctlForm.elements.length; i++) {
+	        var ctl = ctlForm.elements[i];
+	        if (ctl.name.indexOf("answer") == 0) {
+					if (ctl.checked)
+					 nAnswersSelected = nAnswersSelected + 1;
+	        }
+	}
+	if ((nAnswersAllowedToSelect > 0) && (nAnswersSelected > nAnswersAllowedToSelect)) {
+		return false;
+	} else {
+		return true;
+	}
+}
+//--></script>
+
+<form name=testqForm method=post action="test.php">
+<div class="min-h-screen p-4 sm:p-6 font-sans text-slate-800">
+
+  <!-- Header Card -->
+  <div class="backdrop-blur-xl bg-white/70 border border-white/50 rounded-2xl shadow-lg p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div id="vtimer" class="text-xl font-mono font-bold text-indigo-700 bg-white/60 px-4 py-2 rounded-lg shadow-sm border border-indigo-100" title="<?php echo $this->_tpl_vars['lngstr']['page_test']['test_timer_hint']; ?>
+">
+      <?php echo $this->_tpl_vars['lngstr']['page_test']['no_time_limit']; ?>
+
+    </div>
+    <div id="testname" class="text-xl sm:text-2xl font-bold text-slate-800 text-center" title="<?php echo $this->_tpl_vars['lngstr']['page_test']['testname_hint']; ?>
+">
+      <?php echo $this->_tpl_vars['g_vars']['page']['test_name']; ?>
+
+    </div>
+  </div>
+
+  <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => "_notifications.tpl.html", 'smarty_include_vars' => array()));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+  <?php if ($this->_tpl_vars['g_vars']['page']['errors']): ?>
+    <div class="backdrop-blur-xl bg-red-50 border border-red-200 rounded-xl p-4 mb-6 text-red-700">
+       <!-- Error placeholder if needed -->
+    </div>
+  <?php endif; ?>
+
+  <!-- Questions List -->
+  <div class="space-y-8">
+  <?php $_from = $this->_tpl_vars['g_vars']['page']['question']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['g_questionno'] => $this->_tpl_vars['question']):
+?>
+    <div class="backdrop-blur-xl bg-white/60 border border-white/50 rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl hover:bg-white/80">
+      
+      <!-- Question Text -->
+      <div class="flex items-start mb-6">
+        <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-indigo-600 text-white font-bold mr-4 mt-1 shadow-md">
+          <?php echo $this->_tpl_vars['g_questionno']; ?>
+
+        </span>
+        <div class="question text-lg sm:text-xl font-medium text-slate-800 leading-relaxed w-full">
+          <?php echo $this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['text']; ?>
+
+        </div>
+      </div>
+
+      <!-- Answers -->
+      <div class="space-y-3 pl-0 sm:pl-12">
+      <?php $_from = $this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['answer']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['answerno'] => $this->_tpl_vars['answer']):
+?>
+        
+        <?php if ($this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['type'] == QUESTION_TYPE_MULTIPLECHOICE || $this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['type'] == QUESTION_TYPE_TRUEFALSE): ?>
+          <label class="relative block cursor-pointer group">
+            <input type="radio" class="peer sr-only" name="answer[<?php echo $this->_tpl_vars['g_questionno']; ?>
+]" value=<?php echo $this->_tpl_vars['answerno']; ?>
+<?php if ($this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['answer'][$this->_tpl_vars['answerno']]['selected']): ?> checked<?php endif; ?><?php if ($_SESSION['MAIN']['yt_state'] == TEST_STATE_QFEEDBACK): ?> disabled=disabled<?php endif; ?>>
+            <div class="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-300 transition-all shadow-sm peer-checked:border-indigo-600 peer-checked:bg-slate-800 peer-checked:shadow-md flex items-center justify-between">
+               <div class="flex items-center w-full">
+                   <!-- Radio Circle -->
+                   <div class="flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-400 mr-4 peer-checked:border-indigo-600 bg-white flex items-center justify-center transition-colors">
+                      <div class="radio-dot w-3 h-3 rounded-full bg-indigo-600 opacity-0 peer-checked:opacity-100 transition-all transform scale-0 peer-checked:scale-100 duration-200"></div>
+                   </div>
+                   <div class="answer text-slate-700 text-lg flex-grow"><?php echo $this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['answer'][$this->_tpl_vars['answerno']]['text']; ?>
+</div>
+               </div>
+               <!-- Checkmark Icon -->
+               <div class="right-checkmark flex-shrink-0 opacity-0 peer-checked:opacity-100 transition-opacity text-indigo-600 ml-2">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+               </div>
+            </div>
+          </label>
+
+        <?php elseif ($this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['type'] == QUESTION_TYPE_MULTIPLEANSWER): ?>
+          <label class="relative block cursor-pointer group">
+            <input type="checkbox" class="peer sr-only" name="answer[<?php echo $this->_tpl_vars['g_questionno']; ?>
+][]" value=<?php echo $this->_tpl_vars['answerno']; ?>
+<?php if ($this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['answer'][$this->_tpl_vars['answerno']]['selected']): ?> checked<?php endif; ?><?php if ($_SESSION['MAIN']['yt_state'] == TEST_STATE_QFEEDBACK): ?> disabled=disabled<?php endif; ?><?php if (IGT_MULTIPLE_ANSWER_DO_NOT_ALLOW_MORE_ANSWERS_THAN_MARKED_AS_CORRECT): ?> onclick="return checkAnswer(this, <?php echo $this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['correct_answer_count']; ?>
+);"<?php endif; ?>>
+            <div class="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-300 transition-all shadow-sm peer-checked:border-indigo-600 peer-checked:bg-slate-800 peer-checked:shadow-md flex items-center justify-between">
+               <div class="flex items-center w-full">
+                   <!-- Checkbox Square -->
+                   <div class="flex-shrink-0 w-6 h-6 rounded-md border-2 border-slate-400 mr-4 peer-checked:border-indigo-600 peer-checked:bg-indigo-600 bg-white flex items-center justify-center transition-colors">
+                      <svg class="checkbox-icon w-4 h-4 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                   </div>
+                   <div class="answer text-slate-700 text-lg flex-grow"><?php echo $this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['answer'][$this->_tpl_vars['answerno']]['text']; ?>
+</div>
+               </div>
+               <!-- Checkmark Icon -->
+               <div class="right-checkmark flex-shrink-0 opacity-0 peer-checked:opacity-100 transition-opacity text-indigo-600 ml-2">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+               </div>
+            </div>
+          </label>
+
+        <?php elseif ($this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['type'] == QUESTION_TYPE_FILLINTHEBLANK || $this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['type'] == QUESTION_TYPE_ESSAY): ?>
+          <div class="w-full">
+            <textarea class="w-full p-4 rounded-xl bg-white border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all shadow-inner text-slate-800 placeholder-slate-500" name=answer[<?php echo $this->_tpl_vars['g_questionno']; ?>
+][] cols=60 rows=5<?php if ($_SESSION['MAIN']['yt_state'] == TEST_STATE_QFEEDBACK): ?> disabled=disabled<?php endif; ?>><?php echo $this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['answer'][$this->_tpl_vars['answerno']]['text']; ?>
+</textarea>
+          </div>
+        <?php endif; ?>
+
+        <?php if ($_SESSION['MAIN']['yt_state'] == TEST_STATE_QFEEDBACK && $this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['answer'][$this->_tpl_vars['answerno']]['selected'] && $this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['answer'][$this->_tpl_vars['answerno']]['feedback']): ?>
+          <div class="mt-2 ml-10 p-3 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-900 text-sm shadow-sm">
+            <strong>Feedback:</strong> <?php echo $this->_tpl_vars['g_vars']['page']['question'][$this->_tpl_vars['g_questionno']]['answer'][$this->_tpl_vars['answerno']]['feedback']; ?>
+
+          </div>
+        <?php endif; ?>
+
+      <?php endforeach; endif; unset($_from); ?>
+      </div>
+
+    </div>
+  <?php endforeach; endif; unset($_from); ?>
+  </div>
+
+  <!-- Footer / Buttons -->
+  <div class="mt-10 backdrop-blur-xl bg-white/70 border border-white/50 rounded-2xl shadow-lg p-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <?php if ($_SESSION['MAIN']['yt_state'] == TEST_STATE_QFEEDBACK): ?>
+      <input class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-indigo-500/30 transition-all cursor-pointer transform hover:-translate-y-0.5" type=submit name=bsubmit value=" <?php echo $this->_tpl_vars['lngstr']['button_continue']; ?>
+ ">
+    <?php elseif ($this->_tpl_vars['g_vars']['page']['errors_fatal']): ?>
+      <input class="px-8 py-3 bg-red-500 hover:bg-red-600 text-white font-bold rounded-xl shadow-lg hover:shadow-red-500/30 transition-all cursor-pointer" type=submit name=bcancel value=" <?php echo $this->_tpl_vars['lngstr']['button_cancel']; ?>
+ ">
+    <?php else: ?>
+      <input class="w-full sm:w-auto px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-indigo-500/30 transition-all cursor-pointer transform hover:-translate-y-0.5" type=submit name=bsubmit value=" <?php echo $this->_tpl_vars['lngstr']['button_answer']; ?>
+ ">
+      
+      <button type="button" class="w-full sm:w-auto px-6 py-3 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-xl border border-slate-200 shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2" onclick="f=document.testqForm;if (confirm('<?php echo $this->_tpl_vars['lngstr']['page_test']['qst_finish_test']; ?>
+')) { f.action='test.php?action=finish&confirmed=1';f.submit();} else {return false;}">
+        <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <?php echo $this->_tpl_vars['lngstr']['page_test']['finish_test']; ?>
+
+      </button>
+    <?php endif; ?>
+  </div>
+
+</div>
+</form>
+
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => "_footer.tpl.html", 'smarty_include_vars' => array()));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>

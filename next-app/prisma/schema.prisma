@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:@127.0.0.1:3306/testbtx2025"
+}
+
+model User {
+  userid    Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  email     String?
+  firstname String?
+  lastname  String?
+  groupid   Int      @default(19) // Default user group
+  
+  results   Result[]
+
+  @@map("srv_users")
+}
+
+model Test {
+  testid      Int      @id @default(autoincrement())
+  test_name   String
+  subjectid   Int
+  time_limit  Int?
+  
+  results     Result[]
+  questions   Question[]
+
+  @@map("srv_tests")
+}
+
+model Question {
+  questionid      Int      @id @default(autoincrement())
+  question_text   String   @db.Text
+  question_type   Int
+  subjectid       Int
+  
+  tests           Test[] // Implicit many-to-many or explicit join table needed usually, but keeping simple for now
+  answers         Answer[]
+
+  @@map("srv_questions")
+}
+
+model Answer {
+  answerid    Int      @id @default(autoincrement())
+  questionid  Int
+  answer_text String   @db.Text
+  is_correct  Boolean
+  
+  question    Question @relation(fields: [questionid], references: [questionid])
+
+  @@map("srv_answers")
+}
+
+model Result {
+  resultid    Int      @id @default(autoincrement())
+  userid      Int
+  testid      Int
+  score       Float?
+  date_taken  DateTime @default(now())
+  
+  user        User     @relation(fields: [userid], references: [userid])
+  test        Test     @relation(fields: [testid], references: [testid])
+
+  @@map("srv_results")
+}

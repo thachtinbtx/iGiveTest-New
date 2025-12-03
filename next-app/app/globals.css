@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* === ---------------------------------- === */
+/* === DESIGN SYSTEM V3 (Light Mode Only) === */
+/* === ---------------------------------- === */
+
+/* === BASE TOKENS (Neumorphism) === */
+:root {
+  /* -- Light Mode Palette -- */
+  --background: #E0E5EC;
+  --foreground: #0f172a; /* Deep black for high contrast */
+  --accent: rgb(99 102 241); /* Indigo */
+  --shadow-color-rgba: 163, 177, 198;
+  --highlight-color-rgba: 255, 255, 255;
+
+  /* -- Typography -- */
+  --font-size-base: 16px; /* Base for mobile */
+  --font-size-lg: clamp(2rem, 5vw, 3.5rem); /* Responsive large font */
+  --line-height-base: 1.6;
+}
+
+/* === RESPONSIVE TYPOGRAPHY (Desktop gets bigger) === */
+@media (min-width: 768px) {
+  :root {
+    --font-size-base: 20px;
+  }
+}
+
+/* === THEME CONFIG FOR TAILWIND V4 === */
+@theme inline {
+  /* -- Font Setup -- */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* -- Color Palette -- */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+
+  /* -- Neumorphic Shadows -- */
+  --shadow-neumorphic:
+    8px 8px 20px rgba(var(--shadow-color-rgba), 0.6),
+    -8px -8px 20px rgba(var(--highlight-color-rgba), 0.7);
+  --shadow-neumorphic-inset:
+    inset 8px 8px 16px rgba(var(--shadow-color-rgba), 0.6),
+    inset -8px -8px 16px rgba(var(--highlight-color-rgba), 0.7);
+  --shadow-neumorphic-hover:
+    12px 12px 24px rgba(var(--shadow-color-rgba), 0.6),
+    -12px -12px 24px rgba(var(--highlight-color-rgba), 0.7);
+}
+
+/* === GLOBAL & BASE STYLES === */
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,332 @@
+/* ========================================
+   Neumorphic + Glassmorphism Design System
+   ======================================== */
+
+/* Color Palette & Variables */
+:root {
+  /* Light Mode (Soft Pastel) */
+  --bg-light-sky: #87CEEB;
+  --bg-light-salmon: #FA8072;
+  --text-main-light: #0f172a; /* Deep Black/Blue for contrast */
+  --text-muted-light: #475569;
+  --accent-light: #6366f1; /* Indigo */
+  
+  /* Dark Mode (Cyberpunk/Deep Space) */
+  --bg-dark: #212121;
+  --text-main-dark: #e0e0e0;
+  --text-muted-dark: #cbd5e1;
+  --accent-dark: #00ffff; /* Cyan Neon */
+  --accent-glow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+
+  /* Shadows - Tactile Neumorphism (Light) */
+  --shadow-light-sm: 
+    3px 3px 6px rgba(163, 177, 198, 0.6), 
+    -3px -3px 6px rgba(255, 255, 255, 0.7);
+    
+  --shadow-light-md: 
+    8px 8px 16px rgba(163, 177, 198, 0.6), 
+    -8px -8px 16px rgba(255, 255, 255, 0.7);
+    
+  --shadow-light-lg: 
+    12px 12px 24px rgba(163, 177, 198, 0.6), 
+    -12px -12px 24px rgba(255, 255, 255, 0.7);
+    
+  --shadow-light-inset: 
+    inset 4px 4px 8px rgba(163, 177, 198, 0.6), 
+    inset -4px -4px 8px rgba(255, 255, 255, 0.7);
+
+  /* Shadows/Glow - Glassmorphism (Dark) */
+  --shadow-dark-glow: 0 0 15px rgba(0, 255, 255, 0.3);
+  --border-dark: 1px solid rgba(255, 255, 255, 0.1);
+  
+  /* Common */
+  --radius-xl: 2rem; /* rounded-3xl */
+  --radius-lg: 1.5rem;
+}
+
+/* Body Background */
+body {
+  background-color: var(--bg-light-sky); /* Fallback */
+  background-image: linear-gradient(to right bottom, var(--bg-light-sky), var(--bg-light-salmon));
+  color: var(--text-main-light);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  background-image: none;
+  background-color: var(--bg-dark);
+  color: var(--text-main-dark);
+}
+
+/* Card Component */
+.neu-card {
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+/* Light Mode Card - Enhanced Glassmorphism */
+body:not(.dark-mode) .neu-card {
+  background: rgba(255, 255, 255, 0.45); /* Adjusted for better glass feel */
+  backdrop-filter: blur(24px); /* Increased blur (Tailwind's -xl) */
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow-light-md);
+}
+
+/* Dark Mode Card */
+body.dark-mode .neu-card {
+  background: rgba(33, 33, 33, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: var(--border-dark);
+  box-shadow: var(--shadow-dark-glow);
+}
+
+/* Button Component */
+.neu-btn {
+  padding: 0.875rem 1.5rem; /* 14px 24px - min 44px height */
+  min-height: 44px;
+  border-radius: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  outline: none;
+}
+
+/* Light Mode Button */
+body:not(.dark-mode) .neu-btn {
+  background: linear-gradient(145deg, #fefefe, #e2e2e2);
+  color: var(--text-main-light);
+  box-shadow: var(--shadow-light-sm);
+}
+
+body:not(.dark-mode) .neu-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-light-md);
+}
+
+body:not(.dark-mode) .neu-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-light-inset);
+}
+
+/* Dark Mode Button */
+body.dark-mode .neu-btn {
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--accent-dark);
+  border: 1px solid var(--accent-dark);
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
+}
+
+body.dark-mode .neu-btn:hover {
+  background: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  text-shadow: 0 0 5px var(--accent-dark);
+}
+
+/* Input Field */
+.neu-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.75rem 1.25rem;
+  border-radius: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* Light Mode Input */
+body:not(.dark-mode) .neu-input {
+  background: #f0f8ff;
+  border: none;
+  box-shadow: var(--shadow-light-inset);
+  color: var(--text-main-light);
+}
+
+body:not(.dark-mode) .neu-input:focus {
+  box-shadow: 
+    inset 2px 2px 5px rgba(163, 177, 198, 0.4), 
+    inset -2px -2px 5px rgba(255, 255, 255, 0.6),
+    0 0 0 2px var(--accent-light);
+}
+
+/* Dark Mode Input */
+body.dark-mode .neu-input {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main-dark);
+}
+
+body.dark-mode .neu-input:focus {
+  border-color: var(--accent-dark);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+/* Typography Utilities */
+.text-accent {
+  color: var(--accent-light);
+}
+body.dark-mode .text-accent {
+  color: var(--accent-dark);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.text-muted {
+  color: var(--text-muted-light);
+}
+body.dark-mode .text-muted {
+  color: var(--text-muted-dark);
+}
+
+/* Table Styles */
+.neu-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+}
+
+.neu-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-muted-light);
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+body.dark-mode .neu-table th {
+  color: var(--text-muted-dark);
+}
+
+.neu-table td {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+}
+body.dark-mode .neu-table td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.neu-table tr td:first-child {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+.neu-table tr td:last-child {
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Utility Classes for Compatibility */
+.glass-panel, .glass-panel-strong, .glass-card, .neu-card {
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.btn-neumorphic, .btn-neumorphic-primary, .neu-btn {
+  padding: 0.875rem 1.5rem; /* min 44px height */
+  min-height: 44px;
+  border-radius: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  outline: none;
+}
+
+.input-neumorphic, .neu-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.75rem 1.25rem;
+  border-radius: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* Primary (Accent) Button */
+body:not(.dark-mode) .neu-btn.neu-btn-primary {
+  background: var(--accent-light);
+  color: white;
+  box-shadow: 6px 6px 12px rgba(99, 102, 241, 0.3), /* Softer accent shadow */
+              -6px -6px 12px rgba(255, 255, 255, 0.6);
+}
+
+body:not(.dark-mode) .neu-btn.neu-btn-primary:hover {
+  background: #4f46e5; /* Slightly darker indigo */
+  transform: translateY(-2px);
+}
+
+body:not(.dark-mode) .neu-btn.neu-btn-primary:active {
+  box-shadow: var(--shadow-light-inset);
+  background: #6366f1;
+  transform: translateY(0);
+}
+
+/* Secondary (Default/Subtle) Button */
+body:not(.dark-mode) .neu-btn.neu-btn-secondary {
+   background: linear-gradient(145deg, #f9f9f9, #e0e0e0);
+   color: var(--text-muted-light);
+   box-shadow: var(--shadow-light-sm);
+}
+
+body:not(.dark-mode) .neu-btn.neu-btn-secondary:hover {
+    background: linear-gradient(145deg, #e1e3e6, #f5f7fa);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-light-md);
+}
+
+body:not(.dark-mode) .neu-btn.neu-btn-secondary:active {
+    box-shadow: var(--shadow-light-inset);
+    transform: translateY(0);
+}
+
+/* Success (Green) Button */
+body:not(.dark-mode) .neu-btn.neu-btn-success {
+  background: #10b981; /* Emerald-500 */
+  color: white;
+  box-shadow: 6px 6px 12px rgba(16, 185, 129, 0.3),
+              -6px -6px 12px rgba(255, 255, 255, 0.6);
+}
+
+body:not(.dark-mode) .neu-btn.neu-btn-success:hover {
+  background: #059669; /* Emerald-600 */
+  transform: translateY(-2px);
+}
+
+body:not(.dark-mode) .neu-btn.neu-btn-success:active {
+  box-shadow: var(--shadow-light-inset);
+  background: #10b981;
+  transform: translateY(0);
+}
+
+/* Disabled Button */
+.neu-btn:disabled {
+  background: #e5e7eb; /* Cool Gray 200 */
+  color: #9ca3af; /* Cool Gray 400 */
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+

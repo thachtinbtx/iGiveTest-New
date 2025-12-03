@@ -1,0 +1,109 @@
+<{* Smarty *}>
+<{include file="_header.tpl.html"}>
+
+<style>
+/* Fix for radio button checkmark visibility */
+input[type="radio"]:checked + div .radio-dot {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+input[type="radio"]:checked + div {
+    background-color: #1e293b !important; /* slate-800 */
+    border-color: #4f46e5 !important; /* indigo-600 */
+}
+input[type="radio"]:checked + div .answer {
+    color: white !important;
+}
+input[type="radio"]:checked + div .right-checkmark {
+    opacity: 1 !important;
+}
+
+/* Fix for checkbox checkmark visibility */
+input[type="checkbox"]:checked + div .checkbox-icon {
+    opacity: 1 !important;
+}
+input[type="checkbox"]:checked + div {
+    background-color: #1e293b !important; /* slate-800 */
+    border-color: #4f46e5 !important; /* indigo-600 */
+}
+input[type="checkbox"]:checked + div .answer {
+    color: white !important;
+}
+input[type="checkbox"]:checked + div .right-checkmark {
+    opacity: 1 !important;
+}
+</style>
+
+<{if $g_vars.page.test_time.use}>
+<script language=JavaScript type="text/javascript"><!--
+var dStopTime = new Date();
+dStopTime.setHours(dStopTime.getHours()<{if $g_vars.page.test_time.hours}>+<{$g_vars.page.test_time.hours}><{/if}>,dStopTime.getMinutes()<{if $g_vars.page.test_time.minutes}>+<{$g_vars.page.test_time.minutes}><{/if}>,dStopTime.getSeconds()<{if $g_vars.page.test_time.seconds}>+<{$g_vars.page.test_time.seconds}><{/if}>);
+var clockID = 0;
+function UpdateClock() {
+ if(clockID) {
+  clearTimeout(clockID);
+  clockID  = 0;
+ }
+ var dNow = new Date();
+ if(dNow<dStopTime) {
+  dNow.setHours(dStopTime.getHours()-dNow.getHours(),dStopTime.getMinutes()-dNow.getMinutes(),dStopTime.getSeconds()-dNow.getSeconds());
+  strContent = "&nbsp;<b>"+setLeadingZero(dNow.getHours())+":"+setLeadingZero(dNow.getMinutes())+":"+setLeadingZero(dNow.getSeconds())+"</b>&nbsp;";
+  if(dNow.getMinutes()<1) strContent="<font color=#ff0000>"+strContent+"</font>";
+  document.getElementById("vtimer").innerHTML=strContent;
+  clockID = setTimeout("UpdateClock()", 500);
+ } else {
+  clearTimeout(clockID);
+  clockID = 0;
+  document.getElementById("vtimer").innerHTML = "<b>00:00:00</b>";
+ }
+}
+function setLeadingZero(i) {
+ return (i<10) ? "0"+i : i;
+}
+clockID = setTimeout("UpdateClock()", 500);
+//--></script>
+<{/if}>
+
+<script language=JavaScript type="text/javascript"><!--
+function checkAnswer(ctlToggleAllCB, nAnswersAllowedToSelect) {
+	var bAllowTheAnswerCheck = false;
+	var nAnswersSelected = 0;
+	var ctlForm = ctlToggleAllCB.form;
+	var ctlTR = null;
+	for (var i = 0; i < ctlForm.elements.length; i++) {
+	        var ctl = ctlForm.elements[i];
+	        if (ctl.name.indexOf("answer") == 0) {
+					if (ctl.checked)
+					 nAnswersSelected = nAnswersSelected + 1;
+	        }
+	}
+	if ((nAnswersAllowedToSelect > 0) && (nAnswersSelected > nAnswersAllowedToSelect)) {
+		return false;
+	} else {
+		return true;
+	}
+}
+//--></script>
+
+<form name=testqForm method=post action="test.php">
+<div class="min-h-screen p-4 sm:p-6 font-sans text-slate-800">
+
+  <!-- Header Card -->
+  <div class="backdrop-blur-xl bg-white/70 border border-white/50 rounded-2xl shadow-lg p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <{if IGT_TEST_ALLOW_TO_FINISH_TESTS}>
+      <button type="button" class="w-full sm:w-auto px-6 py-3 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-xl border border-slate-200 shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2" onclick="f=document.testqForm;if (confirm('<{$lngstr.page_test.qst_finish_test}>')) { f.action='test.php?action=finish&confirmed=1';f.submit();} else {return false;}">
+        <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <{$lngstr.page_test.finish_test}>
+          <label class="relative block cursor-pointer group">
+            <input type="checkbox" class="peer sr-only" name="answer[<{$g_questionno}>][]" value=<{$answerno}><{if $g_vars.page.question.$g_questionno.answer.$answerno.selected}> checked<{/if}><{if $smarty.session.MAIN.yt_state == TEST_STATE_QFEEDBACK}> disabled=disabled<{/if}><{if IGT_MULTIPLE_ANSWER_DO_NOT_ALLOW_MORE_ANSWERS_THAN_MARKED_AS_CORRECT}> onclick="return checkAnswer(this, <{$g_vars.page.question.$g_questionno.correct_answer_count}>);"<{/if}>>
+            <div class="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-300 transition-all shadow-sm peer-checked:border-indigo-600 peer-checked:bg-slate-800 peer-checked:shadow-md flex items-center justify-between">
+               <div class="flex items-center w-full">
+      <{/foreach}>
+      </div>
+
+  </div>
+
+</div>
+</form>
+
+<{include file="_footer.tpl.html"}>
