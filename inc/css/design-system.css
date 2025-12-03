@@ -1,0 +1,434 @@
+/* ====================================================================
+   COMPREHENSIVE DESIGN SYSTEM
+   Neumorphism + Glassmorphism
+   ==================================================================== */
+
+/* =============== ROOT VARIABLES =============== */
+:root {
+  /* Light Mode Colors */
+  --bg-light: #E0E5EC;
+  --bg-light-alt: #F0F4F8;
+  --text-light: #0f172a;
+  --text-light-secondary: #475569;
+  --shadow-dark: rgba(163, 177, 198, 0.6);
+  --shadow-light: rgba(255, 255, 255, 0.5);
+  --accent-indigo: #6366f1;
+  --accent-purple: #a855f7;
+  
+  /* Dark Mode Colors */
+  --bg-dark: #212121;
+  --bg-dark-alt: #1a1a1a;
+  --text-dark: #e0e0e0;
+  --text-dark-secondary: #9ca3af;
+  --glow-cyan: #06b6d4;
+  --glow-purple: #a855f7;
+  --border-glow: rgba(6, 182, 212, 0.3);
+  
+  /* Typography */
+  --font-primary: 'Nunito', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-code: 'Fira Code', 'Consolas', monospace;
+  
+  /* Spacing & Sizing */
+  --radius-sm: 1rem;
+  --radius-md: 1.5rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =============== BASE STYLES =============== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.6;
+  background: var(--bg-light);
+  color: var(--text-light);
+  transition: background var(--transition-base), color var(--transition-base);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+  }
+}
+
+/* =============== TYPOGRAPHY SYSTEM =============== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+h5 { font-size: clamp(1.125rem, 2vw, 1.5rem); }
+h6 { font-size: clamp(1rem, 1.5vw, 1.25rem); }
+
+p {
+  margin: 0 0 1rem 0;
+}
+
+code, pre {
+  font-family: var(--font-code);
+}
+
+/* =============== NEUMORPHIC UTILITIES =============== */
+
+/* Neumorphic Card - Light Mode */
+.neu-card {
+  background: linear-gradient(145deg, #ffffff 0%, var(--bg-light) 100%);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: 
+    12px 12px 24px var(--shadow-dark),
+    -12px -12px 24px var(--shadow-light);
+  transition: all var(--transition-base);
+}
+
+.neu-card:hover {
+  box-shadow: 
+    16px 16px 32px var(--shadow-dark),
+    -16px -16px 32px var(--shadow-light);
+  transform: translateY(-2px);
+}
+
+.neu-card:active {
+  box-shadow: 
+    inset 6px 6px 12px var(--shadow-dark),
+    inset -6px -6px 12px var(--shadow-light);
+  transform: translateY(0);
+}
+
+/* Neumorphic Card - Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .neu-card {
+    background: linear-gradient(145deg, #2a2a2a 0%, var(--bg-dark) 100%);
+    box-shadow: 
+      0 0 20px rgba(6, 182, 212, 0.1),
+      0 0 40px rgba(168, 85, 247, 0.05);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+  }
+  
+  .neu-card:hover {
+    box-shadow: 
+      0 0 30px rgba(6, 182, 212, 0.2),
+      0 0 50px rgba(168, 85, 247, 0.1);
+    border-color: rgba(6, 182, 212, 0.4);
+  }
+  
+  .neu-card:active {
+    box-shadow: 
+      inset 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Neumorphic Button */
+.neu-btn {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.neu-btn-primary {
+  background: linear-gradient(145deg, var(--accent-indigo), #4f46e5);
+  color: white;
+  box-shadow: 
+    8px 8px 16px var(--shadow-dark),
+    -8px -8px 16px var(--shadow-light);
+}
+
+.neu-btn-primary:hover {
+  box-shadow: 
+    12px 12px 24px var(--shadow-dark),
+    -12px -12px 24px var(--shadow-light);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.neu-btn-primary:active {
+  box-shadow: 
+    inset 4px 4px 8px rgba(0, 0, 0, 0.2),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.1);
+  transform: translateY(0) scale(0.98);
+}
+
+@media (prefers-color-scheme: dark) {
+  .neu-btn-primary {
+    box-shadow: 
+      0 0 20px rgba(99, 102, 241, 0.3),
+      0 4px 12px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(99, 102, 241, 0.5);
+  }
+  
+  .neu-btn-primary:hover {
+    box-shadow: 
+      0 0 30px rgba(99, 102, 241, 0.5),
+      0 6px 16px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Ripple Effect */
+.neu-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width var(--transition-base), height var(--transition-base);
+}
+
+.neu-btn:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* =============== GLASSMORPHIC UTILITIES =============== */
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    box-shadow: 
+      0 0 20px rgba(6, 182, 212, 0.1),
+      0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* =============== INPUT FIELDS =============== */
+
+.neu-input {
+  width: 100%;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  padding: 1rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--bg-light);
+  color: var(--text-light);
+  box-shadow: 
+    inset 6px 6px 12px var(--shadow-dark),
+    inset -6px -6px 12px var(--shadow-light);
+  transition: all var(--transition-base);
+  outline: none;
+}
+
+.neu-input:focus {
+  box-shadow: 
+    inset 8px 8px 16px var(--shadow-dark),
+    inset -8px -8px 16px var(--shadow-light),
+    0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  .neu-input {
+    background: #2a2a2a;
+    color: var(--text-dark);
+    box-shadow: 
+      inset 4px 4px 8px rgba(0, 0, 0, 0.4),
+      inset -4px -4px 8px rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(6, 182, 212, 0.1);
+  }
+  
+  .neu-input:focus {
+    box-shadow: 
+      inset 4px 4px 8px rgba(0, 0, 0, 0.4),
+      inset -4px -4px 8px rgba(255, 255, 255, 0.02);
+    border-color: var(--glow-cyan);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+  }
+}
+
+/* =============== NAVIGATION (GLASS DOCK) =============== */
+
+.glass-dock {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-xl);
+  padding: 0.75rem 1.5rem;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  z-index: 1000;
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass-dock {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    box-shadow: 
+      0 0 40px rgba(6, 182, 212, 0.2),
+      0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.dock-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  position: relative;
+}
+
+.dock-icon:hover {
+  transform: scale(1.3) translateY(-8px);
+  filter: brightness(1.2);
+}
+
+.dock-icon:active {
+  transform: scale(1.1) translateY(-4px);
+}
+
+/* =============== UTILITY CLASSES =============== */
+
+.container-wide {
+  max-width: 96vw;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.spacing-lg {
+  margin: 3rem 0;
+}
+
+.spacing-md {
+  margin: 2rem 0;
+}
+
+.spacing-sm {
+  margin: 1rem 0;
+}
+
+.grid-tidy {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* =============== ANIMATIONS =============== */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+  }
+}
+
+.animate-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* =============== RESPONSIVE ADJUSTMENTS =============== */
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+  
+  .neu-card {
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+  }
+  
+  .neu-btn {
+    padding: 0.875rem 1.5rem;
+  }
+  
+  .glass-dock {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: 1rem;
+  }
+  
+  .dock-icon {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* =============== PRINT STYLES =============== */
+
+@media print {
+  .glass-dock,
+  .neu-btn {
+    display: none;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+}

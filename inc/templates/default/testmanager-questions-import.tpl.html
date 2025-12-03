@@ -1,0 +1,83 @@
+<{* Smarty *}>
+<{include file="_header.tpl.html"}>
+
+<{include file="_menu-2.tpl.html"}>
+
+<h2><{$g_vars.page.header}></h2>
+
+<{include file="_notifications.tpl.html"}>
+
+<div class="neumorphic-light rounded-2xl p-6 mb-6">
+
+<div class="mb-4">
+    <label class="block text-pastel-cadet font-semibold mb-2"><{$lngstr.page_testmanager_import.document_label}></label>
+    <textarea name="import_document" class="neumorphic-light-inset w-full h-64 p-4 rounded-xl border border-white/20 bg-white/50 focus:ring-2 focus:ring-pastel-cadet/50 focus:outline-none transition-all font-mono text-sm" placeholder="<{getInTagValue text=$lngstr.page_importtest_ut_import_document_hint}>"></textarea>
+    <p class="text-xs text-slate-500 mt-1"><{$lngstr.page_testmanager_import.document_howto}></p>
+</div>
+
+<div class="mb-4">
+    <a class="flex justify-between items-center w-full text-left font-semibold text-pastel-cadet" href="javascript:void(0)" onclick="javascript:toggleSection('div_testmanager_import')">
+        <span><{$lngstr.page_testmanager_import.section_delimiters}></span>
+        <svg class="w-5 h-5 transform transition-transform" id="div_testmanager_import_icon" style="<{if $smarty.cookies.div_testmanager_import and $smarty.cookies.div_testmanager_import=='Y'}>transform: rotate(180deg);<{/if}>" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+    </a>
+    <div id="div_testmanager_import" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6" style="display:<{if $smarty.cookies.div_testmanager_import and $smarty.cookies.div_testmanager_import=='Y'}>grid<{else}>none<{/if}>">
+        <div class="flex items-center">
+            <label class="w-1/3 text-sm font-medium text-slate-700"><{$lngstr.page_testmanager_import.question_delimiter}></label>
+            <{getInputElement name=question_delimiter value=$g_vars.page.question_delimiter class="neumorphic-light-inset w-2/3 p-2"}>
+        </div>
+        <div class="flex items-center">
+            <label class="w-1/3 text-sm font-medium text-slate-700"><{$lngstr.page_testmanager_import.answer_delimiter}></label>
+            <{getInputElement name=answer_delimiter value=$g_vars.page.answer_delimiter class="neumorphic-light-inset w-2/3 p-2"}>
+        </div>
+        <div class="flex items-center">
+            <label class="w-1/3 text-sm font-medium text-slate-700"><{$lngstr.page_testmanager_import.answer2_delimiter}></label>
+            <{getInputElement name=answer2_delimiter value=$g_vars.page.answer2_delimiter class="neumorphic-light-inset w-2/3 p-2"}>
+        </div>
+        <div class="flex items-center">
+            <label class="w-1/3 text-sm font-medium text-slate-700"><{$lngstr.page_testmanager_import.correct_delimiter}></label>
+            <{getInputElement name=correct_delimiter value=$g_vars.page.correct_delimiter class="neumorphic-light-inset w-2/3 p-2"}>
+        </div>
+        <div class="flex items-center">
+            <label class="w-1/3 text-sm font-medium text-slate-700"><{$lngstr.page_testmanager_import.points_delimiter}></label>
+            <{getInputElement name=points_delimiter value=$g_vars.page.points_delimiter class="neumorphic-light-inset w-2/3 p-2"}>
+        </div>
+        <div class="flex items-center">
+            <label class="w-1/3 text-sm font-medium text-slate-700"><{$lngstr.page_testmanager_import.type_delimiter}></label>
+            <{getInputElement name=type_delimiter value=$g_vars.page.type_delimiter class="neumorphic-light-inset w-2/3 p-2"}>
+        </div>
+        <div class="flex items-center">
+            <label class="w-1/3 text-sm font-medium text-slate-700"><{$lngstr.page_testmanager_import.subject_delimiter}></label>
+            <{getInputElement name=subject_delimiter value=$g_vars.page.subject_delimiter class="neumorphic-light-inset w-2/3 p-2"}>
+        </div>
+        <div class="flex items-center">
+            <label class="w-1/3 text-sm font-medium text-slate-700"><{$lngstr.page_testmanager_import.preq_delimiter}></label>
+            <{getInputElement name=preq_delimiter value=$g_vars.page.preq_delimiter class="neumorphic-light-inset w-2/3 p-2"}>
+        </div>
+        <div class="flex items-center">
+            <label class="w-1/3 text-sm font-medium text-slate-700"><{$lngstr.page_testmanager_import.postq_delimiter}></label>
+            <{getInputElement name=postq_delimiter value=$g_vars.page.postq_delimiter class="neumorphic-light-inset w-2/3 p-2"}>
+        </div>
+    </div>
+</div>
+<script>
+function toggleSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    const icon = document.getElementById(sectionId + '_icon');
+    if (section.style.display === 'none') {
+        section.style.display = 'grid';
+        icon.style.transform = 'rotate(180deg)';
+        document.cookie = sectionId + '=Y; path=/;';
+    } else {
+        section.style.display = 'none';
+        icon.style.transform = 'rotate(0deg)';
+        document.cookie = sectionId + '=N; path=/;';
+    }
+}
+</script>
+
+<div class="flex justify-center gap-4 mt-6">
+    <input class="neumorphic-light px-6 py-3 font-bold rounded-xl" type="submit" name="bsubmit" value=" <{$lngstr.button_import}> ">
+    <input class="neumorphic-light px-6 py-3 font-bold rounded-xl" type="submit" name="bcancel" value=" <{$lngstr.button_cancel}> ">
+</div>
+
+<{include file="_footer.tpl.html"}>

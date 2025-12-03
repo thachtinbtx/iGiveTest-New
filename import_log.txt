@@ -1,0 +1,2 @@
+
+Fatal error: Array and string offset access syntax with curly braces is no longer supported in C:\xampp\htdocs\inc\pages\question-bank-import-submit.inc.php on line 149

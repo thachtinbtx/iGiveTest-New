@@ -1,0 +1,26 @@
+Array
+(
+    [question_type] => 6
+    [subjectid] => 2
+    [question_points] => 1
+    [answercount] => 4
+    [question_text] => <p>Thử lại c&acirc;u hỏi Antigravity</p>
+<p>DDSS</p>
+    [answer_text] => Array
+        (
+            [1] => 
+            [2] => 
+            [3] => 
+            [4] => 
+        )
+
+    [answer_correct] => Array
+        (
+            [1] => 1
+            [2] => 1
+            [3] => 0
+            [4] => 0
+        )
+
+    [bsubmit3] => 
+)

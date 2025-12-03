@@ -1,0 +1,120 @@
+<{* Smarty *}>
+<{include file="_header.tpl.html"}>
+
+<{include file="_menu-2.tpl.html"}>
+
+<{include file="_notifications.tpl.html"}>
+
+<div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-pastel-sky"><{$lngstr.page_register.header_register}></h2>
+    <p class="mt-2 text-center text-sm text-slate-600">
+      <{$g_vars.page.intro}>
+    </p>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-4xl">
+    <div class="neumorphic-light rounded-2xl py-8 px-4 sm:px-10">
+      <form method="post" action="register.php">
+        
+        <!-- Account Information -->
+        <div class="mb-8">
+            <h3 class="text-lg leading-6 font-medium text-pastel-cadet mb-4 border-soft-bottom pb-2">Account Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <{$g_vars.page.items.username}>
+                <{$g_vars.page.items.password}>
+                <{$g_vars.page.items.confirmpassword}>
+                <{$g_vars.page.items.email}>
+            </div>
+        </div>
+
+        <!-- Personal Information -->
+        <div class="mb-8">
+            <h3 class="text-lg leading-6 font-medium text-pastel-cadet mb-4 border-soft-bottom pb-2">Personal Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <{$g_vars.page.items.title}>
+                <{$g_vars.page.items.firstname}>
+                <{$g_vars.page.items.lastname}>
+                <{$g_vars.page.items.middlename}>
+                <{$g_vars.page.items.gender}>
+                <{$g_vars.page.items.birthday}>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="mb-8">
+            <h3 class="text-lg leading-6 font-medium text-pastel-cadet mb-4 border-soft-bottom pb-2">Contact Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <{$g_vars.page.items.address}>
+                <{$g_vars.page.items.city}>
+                <{$g_vars.page.items.state}>
+                <{$g_vars.page.items.zip}>
+                <{$g_vars.page.items.country}>
+                <{$g_vars.page.items.phone}>
+                <{$g_vars.page.items.mobile}>
+            </div>
+        </div>
+
+        <!-- Other Information -->
+        <div class="mb-8">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <{$g_vars.page.items.fax}>
+                <{$g_vars.page.items.pager}>
+                <{$g_vars.page.items.ipphone}>
+                <{$g_vars.page.items.webpage}>
+                <{$g_vars.page.items.icq}>
+                <{$g_vars.page.items.msn}>
+                <{$g_vars.page.items.aol}>
+                <{$g_vars.page.items.husbandwife}>
+                <{$g_vars.page.items.children}>
+                <{$g_vars.page.items.trainer}>
+                <{$g_vars.page.items.photo}>
+                <{$g_vars.page.items.company}>
+                <{$g_vars.page.items.cposition}>
+                <{$g_vars.page.items.department}>
+                <{$g_vars.page.items.coffice}>
+                <{$g_vars.page.items.caddress}>
+                <{$g_vars.page.items.ccity}>
+                <{$g_vars.page.items.cstate}>
+                <{$g_vars.page.items.czip}>
+                <{$g_vars.page.items.ccountry}>
+                <{$g_vars.page.items.cphone}>
+                <{$g_vars.page.items.cfax}>
+                <{$g_vars.page.items.cmobile}>
+                <{$g_vars.page.items.cpager}>
+                <{$g_vars.page.items.cipphone}>
+                <{$g_vars.page.items.cwebpage}>
+                <{$g_vars.page.items.cphoto}>
+             </div>
+        </div>
+
+        <!-- Custom Fields -->
+        <div class="mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <{$g_vars.page.items.userfield1}>
+                <{$g_vars.page.items.userfield2}>
+                <{$g_vars.page.items.userfield3}>
+                <{$g_vars.page.items.userfield4}>
+                <{$g_vars.page.items.userfield5}>
+                <{$g_vars.page.items.userfield6}>
+                <{$g_vars.page.items.userfield7}>
+                <{$g_vars.page.items.userfield8}>
+                <{$g_vars.page.items.userfield9}>
+                <{$g_vars.page.items.userfield10}>
+            </div>
+        </div>
+
+        <{$g_vars.page.items.groupid_input}>
+        <{$g_vars.page.items.testid_input}>
+
+        <div class="mt-6">
+          <button type="submit" name="bsubmit" class="neumorphic-light w-full py-3 text-base">
+            <{$lngstr.button_register}>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<{include file="_footer.tpl.html"}>

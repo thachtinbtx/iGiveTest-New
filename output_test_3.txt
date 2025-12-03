@@ -1,0 +1,11 @@
+<h1>Smarty Delimiter Test</h1><h2>Test 1: String Rendering</h2>Template content: Value of foo is: &lt;{$foo}&gt;<br>Rendered output: Value of foo is: bar<br><h2>Test 2: Header Rendering</h2>Rendered output (first 500 chars): <br>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; dir=&quot;ltr&quot;&gt;
+&lt;head&gt;
+&lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;inc/css/neumorphic.css&quot;&gt;
+&lt;style&gt;
+  /* Hide default table borders from legacy css if they interfere */
+  table.rowtable2, table.rowtable2 td { border: none !important; }
+  
+  /* Modernize legacy table rows */
+  .rowone td, .row<h2>Test 3: lngstr Debugging</h2>lngstr type: array<br>lngstr count: 788<br>text_direction value: ltr<br>Template content: Direction: &lt;{$lngstr.text_direction}&gt;<br>Rendered output: Direction: ltr<br>

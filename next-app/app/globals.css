@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/* === ---------------------------------- === */
+/* === DESIGN SYSTEM V3 (Light & Dark)    === */
+/* === ---------------------------------- === */
+
+/* === BASE TOKENS (Neumorphism & Glassmorphism) === */
+:root {
+  /* -- Light Mode Palette (Neumorphic) -- */
+  --background: #E0E5EC;
+  --foreground: #0f172a;
+  --accent: #6366F1; /* Indigo */
+  --shadow-color-rgba: 163, 177, 198;
+  --highlight-color-rgba: 255, 255, 255;
+  --shadow-base: 8px 8px 20px rgba(var(--shadow-color-rgba), 0.6);
+  --highlight-base: -8px -8px 20px rgba(var(--highlight-color-rgba), 0.7);
+
+  /* -- Typography -- */
+  --font-size-base: 18px; /* Slightly larger base for readability */
+  --line-height-base: 1.6;
+}
+
+/* -- Dark Mode Palette (Glass/Glow) -- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a1a1a;
+    --foreground: #e0e0e0;
+    --accent: #22D3EE; /* Neon Cyan */
+    /* In dark mode, we use a "glow" effect instead of traditional shadows */
+    --shadow-base: 0 0 8px rgba(34, 211, 238, 0.6);
+    --highlight-base: 0 0 20px rgba(34, 211, 238, 0.4);
+  }
+}
+
+/* === RESPONSIVE TYPOGRAPHY (Desktop gets bigger) === */
+@media (min-width: 768px) {
+  :root {
+    --font-size-base: 20px;
+  }
+}
+
+/* === THEME CONFIG FOR TAILWIND V4 === */
+@theme {
+  /* -- Font Setup (from layout.tsx) -- */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* -- Color Palette -- */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+
+  /* -- Neumorphic & Glow Shadows -- */
+  --shadow-soft-raised: var(--shadow-base), var(--highlight-base);
+  
+  --shadow-soft-inset: 
+    inset 8px 8px 16px rgba(var(--shadow-color-rgba), 0.6),
+    inset -8px -8px 16px rgba(var(--highlight-color-rgba), 0.7);
+
+  --shadow-soft-hover:
+    12px 12px 24px rgba(var(--shadow-color-rgba), 0.6),
+    -12px -12px 24px rgba(var(--highlight-color-rgba), 0.7);
+}
+
+/* === GLOBAL & BASE STYLES === */
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove default button styles */
+button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: inherit;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* === ---------------------------------- === */
+/* ===           ANIMATIONS             === */
+/* === ---------------------------------- === */
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 850ms linear;
+  background-color: rgba(255, 255, 255, 0.7);
+}
